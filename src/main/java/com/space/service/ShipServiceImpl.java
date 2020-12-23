@@ -206,35 +206,35 @@ public class ShipServiceImpl implements ShipService {
     public Long checkAndParseId(String id) {
 
         if (id == null || id.equals("") || id.equals("0"))
-            throw new BadRequestException("Некорректный ID");
+            throw new BadRequestException("ID is not valid digit");
 
         try {
             Long longId = Long.parseLong(id);
             return longId;
         } catch (NumberFormatException e) {
-            throw new BadRequestException("ID не является числом", e);
+            throw new BadRequestException("ID is not a digit", e);
         }
     }
 
     private void checkShipParams(Ship ship) {
 
         if (ship.getName() != null && (ship.getName().length() < 1 || ship.getName().length() > 50))
-            throw new BadRequestException("Incorrect Ship.name");
+            throw new BadRequestException("Incorrect ship name");
 
         if (ship.getPlanet() != null && (ship.getPlanet().length() < 1 || ship.getPlanet().length() > 50))
-            throw new BadRequestException("Incorrect Ship.planet");
+            throw new BadRequestException("Incorrect ship planet");
 
         if (ship.getCrewSize() != null && (ship.getCrewSize() < 1 || ship.getCrewSize() > 9999))
-            throw new BadRequestException("Incorrect Ship.crewSize");
+            throw new BadRequestException("Incorrect ship crewSize");
 
         if (ship.getSpeed() != null && (ship.getSpeed() < 0.01D || ship.getSpeed() > 0.99D))
-            throw new BadRequestException("Incorrect Ship.speed");
+            throw new BadRequestException("Incorrect ship speed");
 
         if (ship.getProdDate() != null) {
             Calendar cal = Calendar.getInstance();
             cal.setTime(ship.getProdDate());
             if (cal.get(Calendar.YEAR) < 2800 || cal.get(Calendar.YEAR) > 3019)
-                throw new BadRequestException("Incorrect Ship.date");
+                throw new BadRequestException("Incorrect ship production date");
         }
     }
 
