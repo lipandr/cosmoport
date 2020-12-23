@@ -12,11 +12,11 @@ public interface ShipService {
 
     List<Ship> getAllShips(Specification<Ship> specification);
 
-    Ship createShip(Ship ship);
+    Ship createShip(Ship requestShip);
 
     Ship editShip(Long id, Ship ship);
 
-    void deleteShip(Long id);
+    void deleteById(Long id);
 
     Ship getShip(Long id);
 
@@ -26,16 +26,18 @@ public interface ShipService {
 
     Specification<Ship> filterByShipType(ShipType shipType);
 
-    Specification<Ship> filterByDate(Long min, Long max);
+    Specification<Ship> filterByDate(Long after, Long before);
 
     Specification<Ship> filterByUsage(Boolean isUsed);
 
-    Specification<Ship> filterBySpeed(Double minSpeed, Double maxSpeed);
+    Specification<Ship> filterBySpeed(Double min, Double max);
 
     Specification<Ship> filterByCrewSize(Integer min, Integer max);
 
     Specification<Ship> filterByRating(Double min, Double max);
 
     Page<Ship> getAllShips(Specification<Ship> shipSpecification, Pageable sortedByName);
+
+    Long checkAndParseId(String id);
 
 }
